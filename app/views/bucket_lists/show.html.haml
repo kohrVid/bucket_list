@@ -2,11 +2,7 @@
 
 %ul
   - @destinations.each do |destination|
-    %li
-      %h3 
-        = destination.name
-      //%img{src: destination.image_url, alt: destination.name}
-      = image_tag destination.image_url, alt: destination.name
+    = render partial: "destinations/destination", locals: { destination: destination }
 
 .new-destination
   = form_for @destination do |f|
@@ -16,4 +12,4 @@
           = f.label col, t("activerecord.attributes.destination.#{col}")
           = f.text_field col
     %fieldset
-      = f.submit "Add Destination"
+      = f.submit "Add Destination", id: "add-destination-button"

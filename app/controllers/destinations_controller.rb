@@ -4,11 +4,16 @@ class DestinationsController < ApplicationController
   end
   def create
     @destination = Destination.new(destination_params)
-    if @destination.save
-      redirect_to bucket_list_path
-    else
-      render "bucket_lists/show"
-    end
+#    respond_to do |format|
+      if @destination.save
+#	format.html { redirect_to bucket_list_path }
+#	format.js { 
+	  render partial: "destinations/destination", locals: { destination: @destination }
+# }
+      else
+	render "bucket_lists/show"
+      end
+ #   end
   end
 
 

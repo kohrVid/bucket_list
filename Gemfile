@@ -36,6 +36,7 @@ gem "haml-rails"
 group :test do
   gem "database_cleaner"
   gem "launchy"
+  gem "selenium-webdriver"
 end
 
 group :development, :test do

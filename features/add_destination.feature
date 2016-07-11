@@ -1,5 +1,6 @@
 Feature: Add Destination
 
+  # @javascript
   Scenario: A traveller adds a destination to their bucket list
     Given they have signed up
       And they have signed in
