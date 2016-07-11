@@ -1,0 +1,19 @@
+%h1 Bucket List
+
+%ul
+  - @destinations.each do |destination|
+    %li
+      %h3 
+        = destination.name
+      //%img{src: destination.image_url, alt: destination.name}
+      = image_tag destination.image_url, alt: destination.name
+
+.new-destination
+  = form_for @destination do |f|
+    - Destination.columns.map(&:name).each do |col|
+      - unless ["id", "created_at", "updated_at"].include? col
+        %fieldset
+          = f.label col, t("activerecord.attributes.destination.#{col}")
+          = f.text_field col
+    %fieldset
+      = f.submit "Add Destination"
