@@ -1,0 +1,10 @@
+var destinations = $("#show-destinations");
+destinations.append("<%= escape_javascript(render partial: "destinations/destination",
+					   locals: { destination: @destination }) %>");
+
+<% @todo_items.each do |todo_item| %>
+  var todoItemId = $("#destination_<%= @destination.id %>_todo_items");
+  todoItemId.append("<%= escape_javascript(render partial: "destinations/todo_items",
+					   locals: { destination: @destination,
+			                   todo_item: todo_item }) %>");
+<% end %>

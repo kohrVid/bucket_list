@@ -26,3 +26,13 @@ en:
         destination:
           name: "Name"
           image_url: "Image URL"
+          add_button: "Add Destination" 
+        todo_item: 
+          name: "Name"
+          likes: "Likes"
+          image_url: "Image URL"
+          priority: "Priority"
+          where: "Where"
+          latitude: "Latitude"
+          longitude: "Longitude"
+          add_button: "Add Item to Destination"

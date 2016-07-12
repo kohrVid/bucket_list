@@ -1,15 +1,26 @@
 %h1 Bucket List
 
-%ul
+%ul#show-destinations
   - @destinations.each do |destination|
     = render partial: "destinations/destination", locals: { destination: destination }
 
 .new-destination
-  = form_for @destination do |f|
+  = form_for @destination, remote: true do |f|
     - Destination.columns.map(&:name).each do |col|
       - unless ["id", "created_at", "updated_at"].include? col
         %fieldset
           = f.label col, t("activerecord.attributes.destination.#{col}")
           = f.text_field col
+    %strong Add a new Todo Item
+    = f.fields_for :todo_items do |builder|
+      %ul
+        %fieldset
+          - TodoItem.columns.map(&:name).each do |column|
+            - unless ["id", "created_at", "updated_at", "destination", 
+              "destination_id"].include? column
+              %li
+                = builder.label column, t("activerecord.attributes.todo_item.#{column}")
+                = builder.text_field column, id: "#{column}-#{@destination.id}"
     %fieldset
-      = f.submit "Add Destination", id: "add-destination-button"
+      = f.submit  t("activerecord.attributes.destination.add_button"), 
+        id: "add-destination-button"
