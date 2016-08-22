@@ -1,0 +1,45 @@
+body{
+  overflow-x: hidden;
+}
+.stretch-image {
+//  position: relative;
+  img {
+    width: 100%;
+  }
+}
+
+#show-destinations {
+  position: relative;
+  display: block;
+  top: 100vh;
+}
+
+.over-image {
+  position: relative;
+  div {
+    display: inline-block;
+    width: 100%;
+    height: 900px;
+    position: absolute;
+    strong {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: table-cell;
+      vertical-align: middle;
+      top: 20%;
+    }
+  }
+}
+
+#new-destination {
+  position: relative;
+}
+
+.p-1-bottom {
+  padding-bottom: 1rem;
+}
+
+.p-1-top {
+  padding-top: 1rem;
+}

@@ -1,0 +1,10 @@
+%h1 Bucket List
+
+.row
+  #map.columns.small-12.medium-6.large-6
+   
+  #nearby.columns.small-12.medium-6.large-6
+
+%ul#show-destinations.no-bullet
+  = render @todo_items 
+    =# render partial: "destinations/destination", locals: { destination: destination }

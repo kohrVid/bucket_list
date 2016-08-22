@@ -32,6 +32,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "devise"
 gem "haml-rails"
+gem "foundation-rails"
+gem "geocoder"
 
 group :test do
   gem "database_cleaner"
@@ -44,6 +46,8 @@ group :development, :test do
   gem 'pry-byebug'
   gem "rspec-rails"
   gem "cucumber-rails"
+#  gem "capybara-webkit"
+  gem "faker"
 end
 
 group :development do

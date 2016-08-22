@@ -1,4 +1,5 @@
 class DestinationsController < ApplicationController
+
   def create
     @destinations = Destination.all
     @destination = Destination.new(destination_params)
@@ -37,7 +38,6 @@ class DestinationsController < ApplicationController
     def destination_params
       params.require(:destination).permit(:id, :name, :image_url,
 					  todo_items_attributes: [:id,:name, :likes, 
-					  :image_url, :priority, :where, :latitude, 
-					  :longitude])
+					  :image_url, :priority, :location])
     end
 end

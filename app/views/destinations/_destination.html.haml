@@ -1,21 +1,24 @@
 %li
-  %h3= destination.name
-  = image_tag image_url(destination.image_url), alt: destination.name
-  %ul.show-todo-items{id: ["destination", destination.id, "todo_items"]}
-    - destination.todo_items.each do |todo_item|
-      = render partial: "destinations/todo_items", 
-        locals: { destination: destination, todo_item: todo_item }
-  = form_for destination, remote: true do |f|
-    = f.fields_for :todo_items do |builder|
-      %ul
-        %fieldset
-          - TodoItem.columns.map(&:name).each do |column|
-            - unless ["id", "created_at", "updated_at", "destination", 
-              "destination_id"].include? column
-              %li
-                = builder.label column, t("activerecord.attributes.todo_item.#{column}")
-                = builder.text_field column, id: "#{column}-#{destination.id}"
+  .stretch-image
+    .over-image
+      %div
+        %strong
+          %h3.column.text-center= destination.name
+    = image_tag image_url(destination.image_url), alt: destination.name, class: "p-1-bottom p-1-top"
+  %ul.show-todo-items.row{id: ["destination", destination.id, "todo_items"]}
+    - destination.todo_items.each do |todo_item| 
+      = render partial: "todo_items/todo_item", 
+          locals: { todo_item: todo_item }
+    .row.clearfix  
+      = form_for destination, remote: true do |f|
+        = f.fields_for :todo_items do |builder|
+          %ul.no-bullet.panel.radius.columns.small-6.medium-4.large-3
+            %fieldset
+              - TodoItem.fields.each do |col|
+                %li
+                  = builder.label col, t("activerecord.attributes.todo_item.#{col}")
+                  = builder.text_field col, id: "#{col}-#{destination.id}"
 
-      %fieldset
-        = f.submit t("activerecord.attributes.todo_item.add_button"), 
-          id: "item-submit-#{destination.id}", class: "item-submit"
+            %fieldset
+              = f.submit t("activerecord.attributes.todo_item.add_button"), 
+                id: "item-submit-#{destination.id}", class: "item-submit small button radius"

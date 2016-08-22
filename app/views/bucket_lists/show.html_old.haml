@@ -1,0 +1,24 @@
+%h1 Bucket List
+
+%ul#show-destinations.no-bullet
+  - @destinations.each do |destination|
+    -#render @destinations 
+    = render partial: "destinations/destination", locals: { destination: destination }
+
+.new-destination.panel.radius.columns.small-12.medium-6.large-4
+  = form_for @destination, remote: true do |f|
+    - Destination.fields.each do |col|
+      %fieldset
+        = f.label col, t("activerecord.attributes.destination.#{col}")
+        = f.text_field col
+    %strong Add a new Todo Item
+    = f.fields_for :todo_items do |builder|
+      %ul.no-bullet
+        %fieldset
+          - TodoItem.fields.each do |col|
+            %li
+              = builder.label col, t("activerecord.attributes.todo_item.#{col}")
+              = builder.text_field col, id: "#{col}-#{@destination.id}"
+    %fieldset
+      = f.submit t("activerecord.attributes.destination.add_button"), 
+        id: "add-destination-button", class: "button radius"

@@ -1,0 +1,14 @@
+%li
+  .panel.radius.columns.small-6.medium-4.large-3
+    %h4= todo_item.name
+    = image_tag image_url(todo_item.image_url), alt: todo_item.name, class: "large-12"
+    - TodoItem.fields.each do |col|
+      %p
+        %strong= t("activerecord.attributes.todo_item.#{col}") + ": "
+        = todo_item.send(col)
+    %p
+      %strong= t("activerecord.attributes.todo_item.lat") + ": "
+      = todo_item.send(:lat)
+    %p
+      %strong= t("activerecord.attributes.todo_item.lng") + ": "
+      = todo_item.send(:lng)

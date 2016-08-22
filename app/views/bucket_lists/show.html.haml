@@ -1,26 +1,41 @@
 %h1 Bucket List
 
-%ul#show-destinations
-  - @destinations.each do |destination|
-    = render partial: "destinations/destination", locals: { destination: destination }
+.row
+  #map
+  #map-items.columns.small-6.medium-4.large-3  
+    #sorting-options.panel.radius
+      = link_to "Order by title", todo_items_path(order: :name, desc: false), remote: true, class:"eventListener"
+      = " | "
+      = link_to "Order by title (DESC)", todo_items_path(order: :name, desc: true), remote: true, class:"eventListener"
+      = " | "
+      = link_to "Order by priority", todo_items_path(order: :priority, desc: false), remote: true, class:"eventListener"
+      = " | "
+      = link_to "Order by priority (DESC)", todo_items_path(order: :priority, desc: true), remote: true, class:"eventListener"
 
-.new-destination
+    %ul#show-todo-items.no-bullet
+      %li.panel.radius
+        = image_tag "loading.gif"
+
+
+%ul#show-destinations.no-bullet
+  - @destinations.each do |destination|
+    = render @destinations 
+
+
+#new-destination.panel.radius.columns.small-12.medium-6.large-4
   = form_for @destination, remote: true do |f|
-    - Destination.columns.map(&:name).each do |col|
-      - unless ["id", "created_at", "updated_at"].include? col
-        %fieldset
-          = f.label col, t("activerecord.attributes.destination.#{col}")
-          = f.text_field col
+    - Destination.fields.each do |col|
+      %fieldset
+        = f.label col, t("activerecord.attributes.destination.#{col}")
+        = f.text_field col
     %strong Add a new Todo Item
     = f.fields_for :todo_items do |builder|
-      %ul
+      %ul.no-bullet
         %fieldset
-          - TodoItem.columns.map(&:name).each do |column|
-            - unless ["id", "created_at", "updated_at", "destination", 
-              "destination_id"].include? column
-              %li
-                = builder.label column, t("activerecord.attributes.todo_item.#{column}")
-                = builder.text_field column, id: "#{column}-#{@destination.id}"
+          - TodoItem.fields.each do |col|
+            %li
+              = builder.label col, t("activerecord.attributes.todo_item.#{col}")
+              = builder.text_field col, id: "#{col}-#{@destination.id}"
     %fieldset
-      = f.submit  t("activerecord.attributes.destination.add_button"), 
-        id: "add-destination-button"
+      = f.submit t("activerecord.attributes.destination.add_button"), 
+        id: "add-destination-button", class: "button radius"

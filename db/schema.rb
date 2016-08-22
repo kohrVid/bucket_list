@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711164457) do
+ActiveRecord::Schema.define(version: 20160713111449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,12 +28,12 @@ ActiveRecord::Schema.define(version: 20160711164457) do
     t.integer  "likes"
     t.text     "image_url"
     t.integer  "priority"
-    t.text     "where"
-    t.string   "latitude"
-    t.string   "longitude"
+    t.text     "location"
     t.integer  "destination_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.decimal  "lat",            precision: 20, scale: 14
+    t.decimal  "lng",            precision: 20, scale: 14
   end
 
   add_index "todo_items", ["destination_id"], name: "index_todo_items_on_destination_id", using: :btree

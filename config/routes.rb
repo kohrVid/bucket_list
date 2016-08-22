@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   resources :destinations, only: [:create, :update] do
     resources :todo_items, only: [:create]
   end
-#resources :todo_items, only: [:create]
+  resources :todo_items do
+    collection do
+      get :index
+      get :within
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

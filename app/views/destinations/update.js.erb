@@ -4,7 +4,8 @@ destinations.append("<%= escape_javascript(render partial: "destinations/destina
 
 <% @todo_items.each do |todo_item| %>
   var todoItemId = $("#destination_<%= @destination.id %>_todo_items");
-  todoItemId.append("<%= escape_javascript(render partial: "destinations/todo_items",
-					   locals: { destination: @destination,
-			                   todo_item: todo_item }) %>");
+  todoItemId.append("<%= escape_javascript(render partial: "todo_items/todo_item",
+					   locals: { todo_item: todo_item }) %>");
+  map.addMarker(<%= todo_item.lat %>, <%= todo_item.lng%>);
+  map.updateBounds();
 <% end %>

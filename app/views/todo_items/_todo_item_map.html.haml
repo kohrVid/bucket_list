@@ -1,0 +1,11 @@
+%li.panel.radius{"data-todo-item-id": todo_item.id}
+  %h4= todo_item.name
+  .row
+    .columns.large-5.medium-5.small-5
+      = image_tag image_url(todo_item.image_url), alt: todo_item.name
+    .columns.large-7.medium-7.small-7
+      Location:
+      = todo_item.geocoder_input
+      %br
+      Priority: 
+      = todo_item.send(:priority)

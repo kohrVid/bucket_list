@@ -6,8 +6,6 @@ class CreateTodoItems < ActiveRecord::Migration
       t.text :image_url
       t.integer :priority
       t.text :where
-      t.string :latitude
-      t.string :longitude
       t.references :destination, index: true, foreign_key: true
 
       t.timestamps null: false

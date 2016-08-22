@@ -1,9 +1,0 @@
-%li
-  %h4= todo_item.name
-  = image_tag image_url(todo_item.image_url), alt: todo_item.name
-  - TodoItem.columns.map(&:name).each do |column|
-    - unless ["id", "created_at", "updated_at", "destination", 
-      "destination_id", "name", "image_url"].include? column
-      %p
-        %strong= t("activerecord.attributes.todo_item.#{column}") + ": "
-        = todo_item.send(column)
